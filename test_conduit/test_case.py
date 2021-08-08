@@ -19,7 +19,7 @@ def test_regisztracio():
     username_input = browser.find_element_by_xpath('//input[@placeholder="Username"][@type="text"]')
     username_input.send_keys("mikkamkka")
     email_input = browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-    email_input.send_keys("mikkamakka5@test.hu")
+    email_input.send_keys("mikkamakka4@test.hu")
     password_input = browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
     password_input.send_keys("Mikkamakka2")
     sign_up_button = browser.find_element_by_xpath('//button[contains(text(),"Sign up")]')  #olyan buttont keres amely textje tartalmazza a sign up szöveget.
@@ -156,5 +156,3 @@ def test_logout():
     time.sleep(1)
     sign_link = browser.find_element_by_partial_link_text("Sign in")
     # assert sign_link
-
-test_regisztracio()
