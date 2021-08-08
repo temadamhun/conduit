@@ -19,16 +19,15 @@ def test_regisztracio():
     username_input = browser.find_element_by_xpath('//input[@placeholder="Username"][@type="text"]')
     username_input.send_keys("mikkamkka")
     email_input = browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-    email_input.send_keys("mikkamakka4@test.hu")
+    email_input.send_keys("mikkamakka5@test.hu")
     password_input = browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
     password_input.send_keys("Mikkamakka2")
     sign_up_button = browser.find_element_by_xpath('//button[contains(text(),"Sign up")]')  #olyan buttont keres amely textje tartalmazza a sign up szöveget.
     sign_up_button.click()
-    time.sleep(1)
-    browser.switch_to.window(browser.window_handles[0])
+    time.sleep(3)
+    #browser.switch_to.window(browser.window_handles[0])
 
     reg_result = browser.find_element_by_class_name("swal-title")
-    print(reg_result.text)
     assert reg_result.text == "Welcome!"
 
     reg_label = browser.find_element_by_class_name("swal-text")
@@ -136,8 +135,8 @@ def test_delete_article():
     time.sleep(1)
     delete_button = browser.find_element_by_xpath('//button[@class="btn btn-outline-danger btn-sm"]')
     delete_button.click()
-    time.sleep(1)
-    browser.switch_to.window(browser.window_handles[0])
+    time.sleep(3)
+    #browser.switch_to.window(browser.window_handles[0])
     confirm_result = browser.find_element_by_xpath('//div[@class="swal-title"]')
     assert confirm_result.text == "Oops!" # ez is hibáss.....
 
@@ -157,3 +156,5 @@ def test_logout():
     time.sleep(1)
     sign_link = browser.find_element_by_partial_link_text("Sign in")
     # assert sign_link
+
+test_regisztracio()
