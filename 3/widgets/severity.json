@@ -1,0 +1,91 @@
+[ {
+  "uid" : "98ee0bd2a6f6a14e",
+  "name" : "test_listazas",
+  "time" : {
+    "start" : 1628437974391,
+    "stop" : 1628437980243,
+    "duration" : 5852
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9f07cc3b49d6f38c",
+  "name" : "test_logout",
+  "time" : {
+    "start" : 1628437989068,
+    "stop" : 1628437993877,
+    "duration" : 4809
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ac977685e213b9c7",
+  "name" : "test_delete_article",
+  "time" : {
+    "start" : 1628437980246,
+    "stop" : 1628437985045,
+    "duration" : 4799
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "8eb9c20ab6c60816",
+  "name" : "test_modify_article",
+  "time" : {
+    "start" : 1628437969211,
+    "stop" : 1628437974388,
+    "duration" : 5177
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5aed3176328123dc",
+  "name" : "test_lapozas",
+  "time" : {
+    "start" : 1628437985270,
+    "stop" : 1628437989064,
+    "duration" : 3794
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c861bd3a0edc002a",
+  "name" : "test_regisztracio",
+  "time" : {
+    "start" : 1628437944542,
+    "stop" : 1628437957635,
+    "duration" : 13093
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "7258605498cfe458",
+  "name" : "test_login",
+  "time" : {
+    "start" : 1628437957766,
+    "stop" : 1628437960515,
+    "duration" : 2749
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ef2c62c4847662d0",
+  "name" : "test_accept",
+  "time" : {
+    "start" : 1628437960517,
+    "stop" : 1628437964069,
+    "duration" : 3552
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5163b17192ecf69a",
+  "name" : "test_new_article",
+  "time" : {
+    "start" : 1628437964072,
+    "stop" : 1628437969208,
+    "duration" : 5136
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

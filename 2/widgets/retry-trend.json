@@ -1,9 +1,0 @@
-[ {
-  "buildOrder" : 2,
-  "reportUrl" : "https://temadamhun.github.io/conduit/2/",
-  "reportName" : "Allure Report with history",
-  "data" : {
-    "run" : 9,
-    "retry" : 0
-  }
-} ]
