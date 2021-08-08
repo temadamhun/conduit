@@ -1,12 +1,15 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 def test_regisztracio():
 
-    PATH = "C:\\Users\\temad\\Desktop\\Driver\\chromedriver.exe"
-    URL ="http://localhost:1667/#/"
-    browser = webdriver.Chrome(PATH)
-    browser.maximize_window() #az oldal méretét maximalizálja.
+    browser_options = Options()
+    browser_options.headless = True
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
+    #browser.maximize_window() #az oldal méretét maximalizálja.
+    URL = "http://localhost:1667/#/"
     browser.get(URL)
 
     # sign_up = browser.find_elements_by_class_name("nav-link")[1]
@@ -32,7 +35,9 @@ def test_regisztracio():
     assert reg_label.text == "Your registration was successful!"
 
 def test_login():
-    browser = webdriver.Chrome("C:\\Users\\temad\\Desktop\\Driver\\chromedriver.exe")
+    browser_options = Options()
+    browser_options.headless = True
+    browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
     URL ="http://localhost:1667/#/login"
     browser.get(URL)
     email_input = browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
@@ -47,7 +52,9 @@ def test_login():
     return browser
 
 def test_accept():
-     browser = webdriver.Chrome("C:\\Users\\temad\\Desktop\\Driver\\chromedriver.exe")
+     browser_options = Options()
+     browser_options.headless = True
+     browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
      URL = "http://localhost:1667/#"
      browser.get(URL)
      button_accept = browser.find_element_by_xpath('//button[@class="cookie__bar__buttons__button cookie__bar__buttons__button--accept"]')
@@ -87,10 +94,9 @@ def test_new_article():
     time.sleep(1)
     check_title_label = browser.find_element_by_xpath('//h1')
     assert check_title_label.text == "Article Title New"
-    return browser
 
 def test_modify_article():
-    browser = test_new_article()
+    browser = test_login()
     URL = "http://localhost:1667/#/editor/article-title-new"
     browser.get(URL)
     time.sleep(1)
@@ -151,6 +157,3 @@ def test_logout():
     time.sleep(1)
     sign_link = browser.find_element_by_partial_link_text("Sign in")
     # assert sign_link
-
-
-
