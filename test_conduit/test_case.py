@@ -28,11 +28,9 @@ class TestConduit(object):
         email_input.send_keys("mikkamakka4@test.hu")
         password_input = self.browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
         password_input.send_keys("Mikkamakka2")
-        sign_up_button = self.browser.find_element_by_xpath(
-            '//button[contains(text(),"Sign up")]')  # olyan buttont keres amely textje tartalmazza a sign up szöveget.
+        sign_up_button = self.browser.find_element_by_xpath('//button[contains(text(),"Sign up")]')  # olyan buttont keres amely textje tartalmazza a sign up szöveget.
         sign_up_button.click()
         time.sleep(3)
-        # browser.switch_to.window(browser.window_handles[0])
 
         reg_result = self.browser.find_element_by_class_name("swal-title")
         assert reg_result.text == "Welcome!"
@@ -47,28 +45,22 @@ class TestConduit(object):
         email_input.send_keys("mikkamakka4@test.hu")
         password_input = self.browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
         password_input.send_keys("Mikkamakka2")
-        sign_in_button = self.browser.find_element_by_xpath(
-            '//button[contains(text(),"Sign in")]')  # olyan buttont keres amely textje tartalmazza a sign in szöveget.
+        sign_in_button = self.browser.find_element_by_xpath('//button[contains(text(),"Sign in")]')  # olyan buttont keres amely textje tartalmazza a sign in szöveget.
         sign_in_button.click()
         time.sleep(1)
         logout_check = self.browser.find_element_by_partial_link_text("Log out")
-        assert logout_check.text == " Log out"
+        assert logout_check.text.strip() == "Log out"
 
     def test_accept(self):
         URL = "http://localhost:1667/#"
         self.browser.get(URL)
-        button_accept = self.browser.find_element_by_xpath(
-            '//button[@class="cookie__bar__buttons__button cookie__bar__buttons__button--accept"]')
+        button_accept = self.browser.find_element_by_xpath('//button[@class="cookie__bar__buttons__button cookie__bar__buttons__button--accept"]')
         time.sleep(1)
         button_accept.click()
         time.sleep(1)
         accept_ok = False
-        try:
-            panel = self.browser.find_element_by_id(
-                "cookie-policy-panel")  # ha elfogadtuk a cookiet, ez a div el kell tűnjön
-        except:
-            accept_ok = True  # NoSuchElementError-t kapunk, mivel nincs találat
-        assert accept_ok
+        panel = self.browser.find_elements_by_id("cookie-policy-panel")  # ha elfogadtuk a cookiet, ez a div el kell tűnjön
+        assert len(panel) == 0
 
     def test_new_article(self):
         # belépés
@@ -81,13 +73,11 @@ class TestConduit(object):
         title_input = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
         now = datetime.now().strftime("%Y%m%d%H%M%S")
         title_input.send_keys(now)
-        what_input = self.browser.find_element_by_xpath(
-            '//input[@placeholder="What\'s this article about?"][@type="text"]')
+        what_input = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"][@type="text"]')
         what_input.send_keys("about")
         # what_input = self.browser.find_elements_by_xpath('//input[@type="text"]')[1]
         # what_input.send_keys("Title")
-        password_input = self.browser.find_element_by_xpath(
-            '//textarea[@placeholder="Write your article (in markdown)"]')
+        password_input = self.browser.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
         password_input.send_keys("write write more")
         # password_input = self.browser.find_elements_by_xpath('//textarea')[0]
         # password_input.send_keys("Title")
@@ -108,11 +98,9 @@ class TestConduit(object):
         title_input = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
         title_input.clear()
         title_input.send_keys("Article Modify Title")
-        what_input = self.browser.find_element_by_xpath(
-            '//input[@placeholder="What\'s this article about?"][@type="text"]')
+        what_input = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"][@type="text"]')
         what_input.send_keys("modify about")
-        password_input = self.browser.find_element_by_xpath(
-            '//textarea[@placeholder="Write your article (in markdown)"]')
+        password_input = self.browser.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
         password_input.send_keys("modify write write more")
         submit_button = self.browser.find_element_by_xpath('//button[@type="submit"]')
         submit_button.click()
@@ -122,52 +110,43 @@ class TestConduit(object):
 
     def test_listazas(self):
         self.test_login()
-        link_list = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
-        link_list[0].click()
         time.sleep(1)
-        title = self.browser.find_element_by_xpath('//h1')
-        assert title.text == "Lorem ipsum dolor sit amet"
-        home_link = self.browser.find_element_by_partial_link_text("Home")
-        home_link.click()
+        tag = self.browser.find_elements_by_xpath('//div[@class="tag-list"]/a')[0].text # első tag keresése
+        # a megtalált első taggel rendelkező articole-ok
+        tag_list = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/div[@class="tag-list"]/a[text()="' + tag + '"]')
+        tag_list[0].click() # tagre szűrés
         time.sleep(1)
-        link_list = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
-        link_list[1].click()
-        time.sleep(1)
-        title = self.browser.find_element_by_xpath('//h1')
-        assert title.text == "In nisl nisi scelerisque eu"
+        link_list = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')  # a szűrt tag oldalon az articole-ok keresése
+        assert len(link_list) == len(tag_list)
 
     def test_delete_article(self):
         now = self.test_new_article()
-        URL = "http://localhost:1667/#/articles/" + now
+        URL = "http://localhost:1667/#/articles/" + now  # az újonnan létrehozott article megnyitása.
         self.browser.get(URL)
         time.sleep(1)
         delete_button = self.browser.find_element_by_xpath('//button[@class="btn btn-outline-danger btn-sm"]')
         delete_button.click()
         time.sleep(1)
-        deleted = False
-        try:
-            confirm_result = self.browser.find_element_by_xpath('//h1[text()="' + now + '"]')
-        except:
-            deleted = True
-        assert deleted
+        confirm_result = self.browser.find_elements_by_xpath('//h1[text()="' + now + '"]') # a kitörölt article title-re keresés.
+        assert len(confirm_result) == 0
 
-    def test_lapozas(self):  # mi itt a feladat???
+    def test_lapozas(self):
         self.test_login()
         time.sleep(1)
         link_page = self.browser.find_elements_by_xpath('//a[@class="page-link"]')
-        link_page[1].click()
-        li_2 = self.browser.find_element_by_xpath('//li[@class="page-item active"]')
-        assert li_2.get_attribute("data-test") == "page-link-2"
+        for page in link_page:
+            page.click()
+            link = self.browser.find_element_by_xpath('//li[@class="page-item active"]/a') # az adott oldal active class-t kap. Az alatta lévő link (aktuális oldal) kiolvasása.
+            assert link.text == page.text
 
     def test_adatok_mentese(self):
         self.test_login()
         time.sleep(1)
-        titles = self.browser.find_elements_by_xpath('//h1')
+        titles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1') # minden articole title h1 kiolvasása
         list = []
         for e in titles:
             list.append(e.text + '\n')
-        list.pop(0)
-        with open("article_titles.txt", 'w+') as file:
+        with open("article_titles.txt", 'w+') as file: # fájl megnyítása írásra, ha nincs létrehozza
             file.writelines(list)
         with open("article_titles.txt", "r") as file:
             assert file.readlines() == list
@@ -178,27 +157,21 @@ class TestConduit(object):
         time.sleep(1)
         with open('article_titles.txt', 'r') as file:
             list = file.read().splitlines()  # \n miatt soronként vágjuk
-            for x in range(len(list)//4):  #  articole létrehozása, az első négy sor lesz egy article adatai...
+            for x in range(len(list)//4):  #  articole létrehozása, a fájlban szereplő első négy sor lesz egy article adatai...
                 href = self.browser.find_element_by_partial_link_text('New Article')
                 href.click()
                 time.sleep(1)
                 title_input = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
-                title = list[1 + 4 * x]
+                title = list[4 * x]
                 title_input.send_keys(title)
-                what_input = self.browser.find_element_by_xpath(
-                    '//input[@placeholder="What\'s this article about?"][@type="text"]')
-                about = list[2 + 4 * x]
+                what_input = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"][@type="text"]')
+                about = list[4 * x + 1]
                 what_input.send_keys(about)
-                # what_input = self.browser.find_elements_by_xpath('//input[@type="text"]')[1]
-                # what_input.send_keys("Title")
-                password_input = self.browser.find_element_by_xpath(
-                    '//textarea[@placeholder="Write your article (in markdown)"]')
-                more = list[3 + 4 * x]
+                password_input = self.browser.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
+                more = list[4 * x + 2]
                 password_input.send_keys(more)
-                # password_input = self.browser.find_elements_by_xpath('//textarea')[0]
-                # password_input.send_keys("Title")
                 tag_input = self.browser.find_element_by_xpath('//input[@placeholder="Enter tags"][@type="text"]')
-                tag = list[4 + 4 * x]
+                tag = list[4 * x + 3]
                 tag_input.send_keys(tag)
                 submit_button = self.browser.find_element_by_xpath('//button[@type="submit"]')
                 submit_button.click()
@@ -214,3 +187,4 @@ class TestConduit(object):
         time.sleep(1)
         sign_link = self.browser.find_element_by_partial_link_text("Sign in")
         assert sign_link.text == "Sign in"
+
