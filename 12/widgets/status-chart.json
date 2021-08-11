@@ -1,0 +1,111 @@
+[ {
+  "uid" : "7f6b9fcf821a2846",
+  "name" : "test_new_article_from_file",
+  "time" : {
+    "start" : 1628675796234,
+    "stop" : 1628675798566,
+    "duration" : 2332
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "f0585ce7fb913b99",
+  "name" : "test_lapozas",
+  "time" : {
+    "start" : 1628675787698,
+    "stop" : 1628675790232,
+    "duration" : 2534
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "fdd26780dc5d3fd",
+  "name" : "test_accept",
+  "time" : {
+    "start" : 1628675754308,
+    "stop" : 1628675756384,
+    "duration" : 2076
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c835c893b1daa990",
+  "name" : "test_listazas",
+  "time" : {
+    "start" : 1628675772625,
+    "stop" : 1628675776088,
+    "duration" : 3463
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "2ff099e9896137f9",
+  "name" : "test_logout",
+  "time" : {
+    "start" : 1628675800281,
+    "stop" : 1628675803815,
+    "duration" : 3534
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9a6a80772575b8a",
+  "name" : "test_new_article",
+  "time" : {
+    "start" : 1628675757051,
+    "stop" : 1628675761938,
+    "duration" : 4887
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "142e7940601f33b3",
+  "name" : "test_login",
+  "time" : {
+    "start" : 1628675751225,
+    "stop" : 1628675752619,
+    "duration" : 1394
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "16170d48734aa1cb",
+  "name" : "test_adatok_mentese",
+  "time" : {
+    "start" : 1628675791900,
+    "stop" : 1628675794534,
+    "duration" : 2634
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dea001cfd4d2ea5b",
+  "name" : "test_delete_article",
+  "time" : {
+    "start" : 1628675777844,
+    "stop" : 1628675786028,
+    "duration" : 8184
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e5cec5db56db11d2",
+  "name" : "test_regisztracio",
+  "time" : {
+    "start" : 1628675746007,
+    "stop" : 1628675749581,
+    "duration" : 3574
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ce10396eb77e4f11",
+  "name" : "test_modify_article",
+  "time" : {
+    "start" : 1628675763629,
+    "stop" : 1628675771946,
+    "duration" : 8317
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

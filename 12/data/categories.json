@@ -1,0 +1,26 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "children" : [ {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "FileNotFoundError: [Errno 2] No such file or directory: 'input_article.txt'",
+      "children" : [ {
+        "name" : "test_new_article_from_file",
+        "uid" : "7f6b9fcf821a2846",
+        "parentUid" : "8e8c3c616dd3a1425dd790b2e032a7e8",
+        "status" : "broken",
+        "time" : {
+          "start" : 1628675796234,
+          "stop" : 1628675798566,
+          "duration" : 2332
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "8e8c3c616dd3a1425dd790b2e032a7e8"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  } ],
+  "name" : "categories"
+}
