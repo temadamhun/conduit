@@ -5,7 +5,7 @@ def conduit_login(browser):
     signin_btn = browser.find_element_by_xpath('//a[@href="#/login"]')
     signin_btn.click()
     email_input = browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-    email_input.send_keys("mikkamakka5@test.hu")
+    email_input.send_keys("mikkamakka6@test.hu")
     password_input = browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
     password_input.send_keys("Mikkamakka2")
     sign_in_button = browser.find_element_by_xpath(

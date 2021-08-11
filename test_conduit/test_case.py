@@ -26,7 +26,7 @@ class TestConduit(object):
         username_input = self.browser.find_element_by_xpath('//input[@placeholder="Username"][@type="text"]')
         username_input.send_keys("mikkamkka")
         email_input = self.browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-        email_input.send_keys("mikkamakka5@test.hu")
+        email_input.send_keys("mikkamakka6@test.hu")
         password_input = self.browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
         password_input.send_keys("Mikkamakka2")
         sign_up_button = self.browser.find_element_by_xpath('//button[contains(text(),"Sign up")]')  # olyan buttont keres amely textje tartalmazza a sign up szöveget.
@@ -43,7 +43,7 @@ class TestConduit(object):
         signin_btn = self.browser.find_element_by_xpath('//a[@href="#/login"]')
         signin_btn.click()
         email_input = self.browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-        email_input.send_keys("mikkamakka5@test.hu")
+        email_input.send_keys("mikkamakka6@test.hu")
         password_input = self.browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
         password_input.send_keys("Mikkamakka2")
         sign_in_button = self.browser.find_element_by_xpath(
@@ -151,7 +151,7 @@ class TestConduit(object):
     def test_new_article_from_file(self):
         # belépés
         conduit_login(self.browser)
-        with open('input_article.txt', 'r') as file:
+        with open('test_conduit/input_article.txt', 'r') as file:
             list = file.read().splitlines()  # \n miatt soronként vágjuk
             for x in range(len(list)//4):  #  articole létrehozása, a fájlban szereplő első négy sor lesz egy article adatai...
                 href = self.browser.find_element_by_partial_link_text('New Article')
