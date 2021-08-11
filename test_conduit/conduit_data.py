@@ -15,12 +15,12 @@ def conduit_login(browser):
 
 
 def conduit_new_article(browser):
-    href = browser.find_element_by_partial_link_text('New Article')
-    href.click()
+    article_link = browser.find_element_by_partial_link_text('New Article')
+    article_link.click()
     time.sleep(1)
     title_input = browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
-    now = datetime.now().strftime("%Y%m%d%H%M%S")
-    title_input.send_keys(now)
+    article_title = datetime.now().strftime("%Y%m%d%H%M%S")
+    title_input.send_keys(article_title)
     what_input =browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"][@type="text"]')
     what_input.send_keys("about")
     # what_input = self.browser.find_elements_by_xpath('//input[@type="text"]')[1]
@@ -34,4 +34,4 @@ def conduit_new_article(browser):
     submit_button = browser.find_element_by_xpath('//button[@type="submit"]')
     submit_button.click()
     time.sleep(2)
-    return now
+    return article_title

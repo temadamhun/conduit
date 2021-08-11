@@ -65,12 +65,12 @@ class TestConduit(object):
     def test_new_article(self):
         # belépés
         conduit_login(self.browser)
-        href = self.browser.find_element_by_partial_link_text('New Article')
-        href.click()
+        article_link = self.browser.find_element_by_partial_link_text('New Article')
+        article_link.click()
         time.sleep(1)
         title_input = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
-        now = datetime.now().strftime("%Y%m%d%H%M%S")
-        title_input.send_keys(now)
+        article_title = datetime.now().strftime("%Y%m%d%H%M%S")
+        title_input.send_keys(article_title)
         what_input = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"][@type="text"]')
         what_input.send_keys("about")
         # what_input = self.browser.find_elements_by_xpath('//input[@type="text"]')[1]
@@ -85,13 +85,13 @@ class TestConduit(object):
         submit_button.click()
         time.sleep(1)
         check_title_label = self.browser.find_element_by_xpath('//h1')
-        assert check_title_label.text == now
-        return now
+        assert check_title_label.text == article_title
+        return article_title
 
     def test_modify_article(self):
         conduit_login(self.browser)
-        now = conduit_new_article(self.browser)
-        URL = "http://localhost:1667/#/editor/" + now
+        article_title = conduit_new_article(self.browser)
+        URL = "http://localhost:1667/#/editor/" + article_title
         self.browser.get(URL)
         time.sleep(1)
         title_input = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
@@ -119,20 +119,20 @@ class TestConduit(object):
 
     def test_delete_article(self):
         conduit_login(self.browser)
-        now = conduit_new_article(self.browser)
-        URL = "http://localhost:1667/#/articles/" + now  # az újonnan létrehozott article megnyitása.
+        article_title = conduit_new_article(self.browser)
+        URL = "http://localhost:1667/#/articles/" + article_title  # az újonnan létrehozott article megnyitása.
         self.browser.get(URL)
         time.sleep(1)
         delete_button = self.browser.find_element_by_xpath('//button[@class="btn btn-outline-danger btn-sm"]')
         delete_button.click()
         time.sleep(1)
-        confirm_result = self.browser.find_elements_by_xpath('//h1[text()="' + now + '"]') # a kitörölt article title-re keresés.
+        confirm_result = self.browser.find_elements_by_xpath('//h1[text()="' + article_title + '"]') # a kitörölt article title-re keresés.
         assert len(confirm_result) == 0
 
     def test_lapozas(self):
         conduit_login(self.browser)
-        link_page = self.browser.find_elements_by_xpath('//a[@class="page-link"]')
-        for page in link_page:
+        link_pages = self.browser.find_elements_by_xpath('//a[@class="page-link"]')
+        for page in link_pages:
             page.click()
             link = self.browser.find_element_by_xpath('//li[@class="page-item active"]/a') # az adott oldal active class-t kap. Az alatta lévő link (aktuális oldal) kiolvasása.
             assert link.text == page.text
@@ -142,7 +142,7 @@ class TestConduit(object):
         titles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1') # minden articole title h1 kiolvasása
         list = []
         for e in titles:
-            list.append(e.text + '\n')
+            list.append(e.text + '\n') # article title-k enterrel
         with open("article_titles.txt", 'w+') as file: # fájl megnyítása írásra, ha nincs létrehozza
             file.writelines(list)
         with open("article_titles.txt", "r") as file:
@@ -154,8 +154,8 @@ class TestConduit(object):
         with open('test_conduit/input_article.txt', 'r') as file:
             list = file.read().splitlines()  # \n miatt soronként vágjuk
             for x in range(len(list)//4):  #  articole létrehozása, a fájlban szereplő első négy sor lesz egy article adatai...
-                href = self.browser.find_element_by_partial_link_text('New Article')
-                href.click()
+                article_link = self.browser.find_element_by_partial_link_text('New Article')
+                article_link.click()
                 time.sleep(1)
                 title_input = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"][@type="text"]')
                 title = list[4 * x]
