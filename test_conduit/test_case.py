@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
+from conduit_data import *
 
 
 class TestConduit(object):
@@ -11,13 +12,13 @@ class TestConduit(object):
         browser_options = Options()
         browser_options.headless = True
         self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
+        URL = "http://localhost:1667/#/"
+        self.browser.get(URL)
 
     def teardown(self):
         self.browser.quit()
 
     def test_regisztracio(self):
-        URL = "http://localhost:1667/#/"
-        self.browser.get(URL)
         # sign_up = browser.find_elements_by_class_name("nav-link")[1]
         # sign_up = browser.find_element_by_xpath('//a[@class="nav-link"][@href="#/register"]')
         sign_up = self.browser.find_element_by_partial_link_text("Sign up")
@@ -25,7 +26,7 @@ class TestConduit(object):
         username_input = self.browser.find_element_by_xpath('//input[@placeholder="Username"][@type="text"]')
         username_input.send_keys("mikkamkka")
         email_input = self.browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-        email_input.send_keys("mikkamakka4@test.hu")
+        email_input.send_keys("mikkamakka5@test.hu")
         password_input = self.browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
         password_input.send_keys("Mikkamakka2")
         sign_up_button = self.browser.find_element_by_xpath('//button[contains(text(),"Sign up")]')  # olyan buttont keres amely textje tartalmazza a sign up szöveget.
@@ -39,21 +40,20 @@ class TestConduit(object):
         assert reg_label.text == "Your registration was successful!"
 
     def test_login(self):
-        URL = "http://localhost:1667/#/login"
-        self.browser.get(URL)
+        signin_btn = self.browser.find_element_by_xpath('//a[@href="#/login"]')
+        signin_btn.click()
         email_input = self.browser.find_element_by_xpath('//input[@placeholder="Email"][@type="text"]')
-        email_input.send_keys("mikkamakka4@test.hu")
+        email_input.send_keys("mikkamakka5@test.hu")
         password_input = self.browser.find_element_by_xpath('//input[@placeholder="Password"][@type="password"]')
         password_input.send_keys("Mikkamakka2")
-        sign_in_button = self.browser.find_element_by_xpath('//button[contains(text(),"Sign in")]')  # olyan buttont keres amely textje tartalmazza a sign in szöveget.
+        sign_in_button = self.browser.find_element_by_xpath(
+            '//button[contains(text(),"Sign in")]')  # olyan buttont keres amely textje tartalmazza a sign in szöveget.
         sign_in_button.click()
         time.sleep(1)
         logout_check = self.browser.find_element_by_partial_link_text("Log out")
         assert logout_check.text.strip() == "Log out"
 
     def test_accept(self):
-        URL = "http://localhost:1667/#"
-        self.browser.get(URL)
         button_accept = self.browser.find_element_by_xpath('//button[@class="cookie__bar__buttons__button cookie__bar__buttons__button--accept"]')
         time.sleep(1)
         button_accept.click()
@@ -64,9 +64,7 @@ class TestConduit(object):
 
     def test_new_article(self):
         # belépés
-        self.test_login()
-        # URL = "http://localhost:1667/#/editor"
-        # self.browser.get(URL)
+        conduit_login(self.browser)
         href = self.browser.find_element_by_partial_link_text('New Article')
         href.click()
         time.sleep(1)
@@ -91,7 +89,8 @@ class TestConduit(object):
         return now
 
     def test_modify_article(self):
-        now = self.test_new_article()
+        conduit_login(self.browser)
+        now = conduit_new_article(self.browser)
         URL = "http://localhost:1667/#/editor/" + now
         self.browser.get(URL)
         time.sleep(1)
@@ -109,8 +108,7 @@ class TestConduit(object):
         assert check_title_label.text == "Article Modify Title"
 
     def test_listazas(self):
-        self.test_login()
-        time.sleep(1)
+        conduit_login(self.browser)
         tag = self.browser.find_elements_by_xpath('//div[@class="tag-list"]/a')[0].text # első tag keresése
         # a megtalált első taggel rendelkező articole-ok
         tag_list = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/div[@class="tag-list"]/a[text()="' + tag + '"]')
@@ -120,7 +118,8 @@ class TestConduit(object):
         assert len(link_list) == len(tag_list)
 
     def test_delete_article(self):
-        now = self.test_new_article()
+        conduit_login(self.browser)
+        now = conduit_new_article(self.browser)
         URL = "http://localhost:1667/#/articles/" + now  # az újonnan létrehozott article megnyitása.
         self.browser.get(URL)
         time.sleep(1)
@@ -131,8 +130,7 @@ class TestConduit(object):
         assert len(confirm_result) == 0
 
     def test_lapozas(self):
-        self.test_login()
-        time.sleep(1)
+        conduit_login(self.browser)
         link_page = self.browser.find_elements_by_xpath('//a[@class="page-link"]')
         for page in link_page:
             page.click()
@@ -140,8 +138,7 @@ class TestConduit(object):
             assert link.text == page.text
 
     def test_adatok_mentese(self):
-        self.test_login()
-        time.sleep(1)
+        conduit_login(self.browser)
         titles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1') # minden articole title h1 kiolvasása
         list = []
         for e in titles:
@@ -153,9 +150,8 @@ class TestConduit(object):
 
     def test_new_article_from_file(self):
         # belépés
-        self.test_adatok_mentese()
-        time.sleep(1)
-        with open('article_titles.txt', 'r') as file:
+        conduit_login(self.browser)
+        with open('input_article.txt', 'r') as file:
             list = file.read().splitlines()  # \n miatt soronként vágjuk
             for x in range(len(list)//4):  #  articole létrehozása, a fájlban szereplő első négy sor lesz egy article adatai...
                 href = self.browser.find_element_by_partial_link_text('New Article')
@@ -180,8 +176,7 @@ class TestConduit(object):
                 assert check_title_label.text == title
 
     def test_logout(self):
-        self.test_login()
-        time.sleep(1)
+        conduit_login(self.browser)
         home_link = self.browser.find_element_by_partial_link_text("Log out")
         home_link.click()
         time.sleep(1)
