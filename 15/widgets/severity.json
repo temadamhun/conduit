@@ -1,0 +1,111 @@
+[ {
+  "uid" : "8103891ad1c76a1e",
+  "name" : "test_logout",
+  "time" : {
+    "start" : 1628844513078,
+    "stop" : 1628844516409,
+    "duration" : 3331
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a93f1c8eddcc475d",
+  "name" : "test_new_article_from_file",
+  "time" : {
+    "start" : 1628844497483,
+    "stop" : 1628844511564,
+    "duration" : 14081
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e75af262898918a7",
+  "name" : "test_delete_article",
+  "time" : {
+    "start" : 1628844481330,
+    "stop" : 1628844489127,
+    "duration" : 7797
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "dc4e77b0471c8cf9",
+  "name" : "test_login",
+  "time" : {
+    "start" : 1628844456188,
+    "stop" : 1628844457480,
+    "duration" : 1292
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c7cf5caaa7d703d3",
+  "name" : "test_modify_article",
+  "time" : {
+    "start" : 1628844468043,
+    "stop" : 1628844475978,
+    "duration" : 7935
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c7a9657748f9b639",
+  "name" : "test_accept",
+  "time" : {
+    "start" : 1628844459011,
+    "stop" : 1628844461072,
+    "duration" : 2061
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e282c548d86e9bc4",
+  "name" : "test_regisztracio",
+  "time" : {
+    "start" : 1628844450824,
+    "stop" : 1628844454420,
+    "duration" : 3596
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7824ab33578895d5",
+  "name" : "test_adatok_mentese",
+  "time" : {
+    "start" : 1628844493570,
+    "stop" : 1628844495962,
+    "duration" : 2392
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f9ced4137a7603d",
+  "name" : "test_new_article",
+  "time" : {
+    "start" : 1628844461612,
+    "stop" : 1628844466505,
+    "duration" : 4893
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "738975784ccb926f",
+  "name" : "test_listazas",
+  "time" : {
+    "start" : 1628844477515,
+    "stop" : 1628844480825,
+    "duration" : 3310
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cdf479ed6487e16",
+  "name" : "test_lapozas",
+  "time" : {
+    "start" : 1628844490679,
+    "stop" : 1628844493050,
+    "duration" : 2371
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

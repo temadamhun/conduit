@@ -1,0 +1,10 @@
+[ {
+  "name" : "GitHub Actions",
+  "type" : "github",
+  "url" : "https://temadamhun.github.io/conduit",
+  "buildOrder" : 15,
+  "buildName" : "GitHub Actions Run #1127029067",
+  "buildUrl" : "https://github.com/temadamhun/conduit/actions/runs/1127029067",
+  "reportName" : "Allure Report with history",
+  "reportUrl" : "https://temadamhun.github.io/conduit/15/"
+} ]
