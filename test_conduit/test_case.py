@@ -141,12 +141,12 @@ class TestConduit(object):
         conduit_login(self.browser)
         titles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]/h1') # minden articole title h1 kiolvasása
         list = []
-        for e in titles:
-            list.append(e.text + '\n') # article title-k enterrel
+        for title in titles:
+            list.append(title.text + '\n') # article title-k enterrel
         with open("article_titles.txt", 'w+') as file: # fájl megnyítása írásra, ha nincs létrehozza
             file.writelines(list)
-        with open("article_titles.txt", "r") as file:
-            assert file.readlines() == list
+        with open("article_titles.txt", "r") as mod_file:
+            assert mod_file.readlines() == list
 
     def test_new_article_from_file(self):
         # belépés
